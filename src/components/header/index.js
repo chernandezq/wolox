@@ -8,11 +8,16 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-const Header = ({title, searchPress}) => {
+const Header = ({title, searchPress, logOut}) => {
   return (
     <ImageBackground
       style={styles.imageBackgroundContainer}
       source={require('../../assets/general/bc_nav_bar.png')}>
+      <View style={{flex: 0.1, alignItems: 'flex-end'}}>
+        <Text style={{color: 'white'}} onPress={logOut}>
+          Cerrar sesión{' '}
+        </Text>
+      </View>
       <View style={styles.containerImages}>
         <View style={styles.row}>
           <TouchableOpacity onPress={() => searchPress('hola')}>

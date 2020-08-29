@@ -116,13 +116,13 @@ const BooksHome = (props) => {
 
   return (
     <View style={{flex: 1, backgroundColor: color_background}}>
-      <Header title={'LIBRARY'} searchPress={searchPress}></Header>
+      <Header
+        title={'LIBRARY'}
+        searchPress={searchPress}
+        logOut={logOut}></Header>
       <View style={{flex: 1}}>
         <View style={{flex: 1}}>
           <List data={books} onCardPress={onCardPress}></List>
-        </View>
-        <View style={{flex: 0.1}}>
-          <Text onPress={logOut}>Cerrar sesión </Text>
         </View>
       </View>
     </View>
