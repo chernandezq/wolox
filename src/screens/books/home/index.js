@@ -1,9 +1,10 @@
-import 'react-native-gesture-handler';
-import React, {useContext, useEffect, useState} from 'react';
-import {AuthContext} from '../../../navigation/AuthNavigator';
-import {SafeAreaView, Text, Alert, View, StyleSheet} from 'react-native';
+import React, {useContext, useEffect} from 'react';
+
+import {Text, View} from 'react-native';
+import List from '../../../components/list';
 import Header from '../../../components/header';
 import {color_background} from '../../../helpers/constants';
+import {AuthContext} from '../../../navigation/AuthNavigator';
 
 const books = [
   {
@@ -91,7 +92,8 @@ const books = [
   },
 ];
 
-const Home = () => {
+const BooksHome = (props) => {
+  const {navigation} = props;
   const {state, dispatch} = useContext(AuthContext);
 
   useEffect(() => {}, []);
@@ -108,14 +110,18 @@ const Home = () => {
     console.warn(item);
   };
 
+  const onCardPress = (item) => {
+    navigation.navigate('BooksDetail', {item});
+  };
+
   return (
     <View style={{flex: 1, backgroundColor: color_background}}>
       <Header title={'LIBRARY'} searchPress={searchPress}></Header>
-      <View style={{flex: 1, alignItems: 'center'}}>
+      <View style={{flex: 1}}>
         <View style={{flex: 1}}>
-          <Text>FlatList </Text>
+          <List data={books} onCardPress={onCardPress}></List>
         </View>
-        <View style={{flex: 0.2}}>
+        <View style={{flex: 0.1}}>
           <Text onPress={logOut}>Cerrar sesión </Text>
         </View>
       </View>
@@ -123,4 +129,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default BooksHome;
