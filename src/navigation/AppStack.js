@@ -1,8 +1,8 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import Home from '../screens/books/home';
-import Detail from '../screens/books/detail';
+import Other from '../screens/others';
+import BooksStack from './BooksStack';
 import {color_base} from '../helpers/constants';
 import {NavigationContainer} from '@react-navigation/native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
@@ -13,13 +13,13 @@ const AppStack = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName="Home"
+        initialRouteName="Library"
         tabBarOptions={{
           activeTintColor: color_base,
         }}>
         <Tab.Screen
           name="Library"
-          component={Home}
+          component={BooksStack}
           options={{
             tabBarLabel: 'Library',
             tabBarIcon: ({color, size}) => (
@@ -29,7 +29,7 @@ const AppStack = () => {
         />
         <Tab.Screen
           name="Whishlist"
-          component={Home}
+          component={Other}
           options={{
             tabBarLabel: 'Whishlist',
             tabBarIcon: ({color, size}) => (
@@ -39,7 +39,7 @@ const AppStack = () => {
         />
         <Tab.Screen
           name="AddNew"
-          component={Home}
+          component={Other}
           options={{
             tabBarLabel: 'AddNew',
             tabBarIcon: ({color, size}) => (
@@ -53,7 +53,7 @@ const AppStack = () => {
         />
         <Tab.Screen
           name="Rentals"
-          component={Home}
+          component={Other}
           options={{
             tabBarLabel: 'Rentals',
             tabBarIcon: ({color, size}) => (
@@ -67,7 +67,7 @@ const AppStack = () => {
         />
         <Tab.Screen
           name="Settings"
-          component={Detail}
+          component={Other}
           options={{
             tabBarLabel: 'Settings',
             tabBarIcon: ({color, size}) => (
