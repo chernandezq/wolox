@@ -16,3 +16,11 @@ export function oauth(username, password) {
     }),
   }).then((response) => response);
 }
+
+export function getBooks() {
+  return axios({
+    method: 'GET',
+    url: `${url}/api/books`,
+    headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+  }).then((response) => response);
+}
