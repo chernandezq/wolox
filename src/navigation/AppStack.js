@@ -1,11 +1,11 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
+import {Image} from 'react-native';
 import Other from '../screens/others';
 import BooksStack from './BooksStack';
 import {color_base} from '../helpers/constants';
 import {NavigationContainer} from '@react-navigation/native';
-import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,7 +23,10 @@ const AppStack = () => {
           options={{
             tabBarLabel: 'Library',
             tabBarIcon: ({color, size}) => (
-              <FontAwesome5Icon color={color} size={size} name={'book'} />
+              <Image
+                style={{width: 26, height: 26, tintColor: color}}
+                source={require('../assets/tool_bar/ic_library.png')}
+              />
             ),
           }}
         />
@@ -33,7 +36,10 @@ const AppStack = () => {
           options={{
             tabBarLabel: 'Whishlist',
             tabBarIcon: ({color, size}) => (
-              <FontAwesome5Icon color={color} size={size} name={'star'} />
+              <Image
+                style={{width: 26, height: 26, tintColor: color}}
+                source={require('../assets/tool_bar/ic_wishlist.png')}
+              />
             ),
           }}
         />
@@ -43,10 +49,9 @@ const AppStack = () => {
           options={{
             tabBarLabel: 'AddNew',
             tabBarIcon: ({color, size}) => (
-              <FontAwesome5Icon
-                color={color}
-                size={size}
-                name={'plus-circle'}
+              <Image
+                style={{width: 26, height: 26, tintColor: color}}
+                source={require('../assets/tool_bar/ic_add_new.png')}
               />
             ),
           }}
@@ -57,10 +62,9 @@ const AppStack = () => {
           options={{
             tabBarLabel: 'Rentals',
             tabBarIcon: ({color, size}) => (
-              <FontAwesome5Icon
-                color={color}
-                size={size}
-                name={'check-circle'}
+              <Image
+                style={{width: 26, height: 26, tintColor: color}}
+                source={require('../assets/tool_bar/ic_myrentals.png')}
               />
             ),
           }}
@@ -71,7 +75,10 @@ const AppStack = () => {
           options={{
             tabBarLabel: 'Settings',
             tabBarIcon: ({color, size}) => (
-              <FontAwesome5Icon color={color} size={size} name={'cog'} />
+              <Image
+                style={{width: 26, height: 26, tintColor: color}}
+                source={require('../assets/tool_bar/ic_settings.png')}
+              />
             ),
           }}
         />
