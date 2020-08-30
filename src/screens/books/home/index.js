@@ -1,102 +1,40 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
+import {getBooks} from '../../../api';
 import {Text, View} from 'react-native';
 import List from '../../../components/list';
 import Header from '../../../components/header';
+import Loader from '../../../components/loader';
 import {color_background} from '../../../helpers/constants';
 import {AuthContext} from '../../../navigation/AuthNavigator';
 
-const books = [
-  {
-    id: 1,
-    author: 'Emmie Thiel',
-    title: 'Ring of Bright Water',
-    genre: 'Short story',
-    publisher: 'Butterworth-Heinemann',
-    year: '1968',
-    image_url: null,
-  },
-  {
-    id: 2,
-    author: 'Christopher Pike',
-    title: 'Scavenger Hunt',
-    genre: 'other',
-    publisher: 'Pocket Books',
-    year: '1989',
-    image_url: null,
-  },
-  {
-    id: 3,
-    author: 'Lois Duncan',
-    title: 'Locked in time',
-    genre: 'suspense',
-    publisher: 'Little, Brown',
-    year: '1985',
-    image_url: 'http://wolox-training.s3.amazonaws.com/uploads/6942334-M.jpg',
-  },
-  {
-    id: 4,
-    author: 'Christopher Pike',
-    title: 'Scavenger Hunt',
-    genre: 'suspense',
-    publisher: 'Pocket Books',
-    year: '1989',
-    image_url: 'http://wolox-training.s3.amazonaws.com/uploads/6963511-M.jpg',
-  },
-  {
-    id: 5,
-    author: 'Christopher Pike',
-    title: 'Scavenger Hunt',
-    genre: 'suspense',
-    publisher: 'Pocket Books',
-    year: '1989',
-    image_url: 'http://wolox-training.s3.amazonaws.com/uploads/6963511-M.jpg',
-  },
-  {
-    id: 6,
-    author: 'Paula Hawkins',
-    title: 'The Girl on the Train\n',
-    genre: 'suspense',
-    publisher: 'Riverhead Books',
-    year: '2015',
-    image_url: 'http://wolox-training.s3.amazonaws.com/uploads/content.jpeg',
-  },
-  {
-    id: 7,
-    author: 'Anthony Doerr',
-    title: 'All the Light We Cannot See',
-    genre: 'suspense',
-    publisher: 'Scribner',
-    year: '2014',
-    image_url: 'http://wolox-training.s3.amazonaws.com/uploads/content.jpeg',
-  },
-  {
-    id: 8,
-    author: 'John Katzenbach',
-    title: 'The analyst',
-    genre: 'thriller',
-    publisher: 'Ballantine Books',
-    year: '2003',
-    image_url:
-      'http://wolox-training.s3.amazonaws.com/uploads/el-psicoanalista-analyst-john-katzenbach-paperback-cover-art.jpg',
-  },
-  {
-    id: 9,
-    author: 'Andy Weir',
-    title: 'The Martian',
-    genre: 'fiction',
-    publisher: 'Crown Publishing Group',
-    year: '2011',
-    image_url:
-      'http://wolox-training.s3.amazonaws.com/uploads/41DNuJfahyL._SX322_BO1_204_203_200_.jpg',
-  },
-];
-
 const BooksHome = (props) => {
   const {navigation} = props;
+  const [loader, setLoader] = React.useState(false);
+  const [books, setBooks] = React.useState([]);
+  const [textLoader, setTextLoader] = useState('');
   const {state, dispatch} = useContext(AuthContext);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    getBooksApi();
+  }, []);
+
+  const getBooksApi = async () => {
+    setLoader(true);
+    setTextLoader('Obteniendo libros, espere...');
+    try {
+      const response = await getBooks();
+      setBooks(response.data.books);
+      dispatch({
+        type: 'SETBOOKS',
+        payload: response.data.books,
+      });
+    } catch (err) {
+      console.warn(err);
+    } finally {
+      setLoader(false);
+    }
+  };
 
   const logOut = async () => {
     try {
@@ -116,6 +54,7 @@ const BooksHome = (props) => {
 
   return (
     <View style={{flex: 1, backgroundColor: color_background}}>
+      <Loader visible={loader} texto={textLoader} />
       <Header
         title={'LIBRARY'}
         searchPress={searchPress}

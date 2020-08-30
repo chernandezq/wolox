@@ -1,4 +1,10 @@
 import AsyncStorage from '@react-native-community/async-storage';
+export const initialState = {
+  isAutenticated: false,
+  access_token: null,
+  token_type: null,
+  books: [],
+};
 
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -34,6 +40,11 @@ export const reducer = (state, action) => {
         isAutenticated: true,
         access_token: action.payload.access_token,
         token_type: action.payload.token_type,
+      };
+    case 'SETBOOKS':
+      return {
+        ...state,
+        books: [data, ...books],
       };
     default:
       return state;
