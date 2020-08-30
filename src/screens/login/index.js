@@ -3,6 +3,7 @@ import React, {useState, useContext} from 'react';
 import {styles} from './style';
 import {oauth} from '../../api';
 import Loader from '../../components/loader';
+import {validateEmal} from '../../helpers/validations';
 import {AuthContext} from '../../navigation/AuthNavigator';
 import {Text, TouchableOpacity, View, TextInput, Alert} from 'react-native';
 
@@ -12,12 +13,14 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [loader, setLoader] = useState(false);
   const [textLoader, setTextLoader] = useState('');
+  const [emailValidated, setEmailValidated] = useState(false);
 
-  const validacion = () => {
-    if (email && password) {
-      signIn();
+  const validacionEmail = (email) => {
+    setEmail(email);
+    if (validateEmal(email)) {
+      setEmailValidated(true);
     } else {
-      Alert.alert('Error', 'Los campos son requeridos');
+      setEmailValidated(false);
     }
   };
 
@@ -56,7 +59,7 @@ const Login = () => {
           keyboardType={'email-address'}
           style={styles.input}
           placeholder={'Correo'}
-          onChangeText={(value) => setEmail(value)}
+          onChangeText={(value) => validacionEmail(value)}
           autoCapitalize="none"
           autoCorrect={false}
         />
@@ -65,7 +68,10 @@ const Login = () => {
           style={styles.input}
           secureTextEntry
           placeholder={'Contraseña'}
-          onChangeText={(value) => setPassword(value)}
+          onChangeText={(value) => {
+            setPassword(value);
+            validacionEmail(email);
+          }}
           autoCapitalize="none"
           autoCorrect={false}
         />
@@ -77,8 +83,13 @@ const Login = () => {
           justifyContent: 'center',
         }}>
         <TouchableOpacity
-          style={styles.boton}
-          onPress={validacion}
+          disabled={!password || !emailValidated}
+          style={
+            !password || !emailValidated == true
+              ? styles.botonDisabled
+              : styles.boton
+          }
+          onPress={signIn}
           underlayColor="#fff">
           <Text style={styles.textoBoton}>Ingresar</Text>
         </TouchableOpacity>
