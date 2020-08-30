@@ -2,17 +2,11 @@ import React, {useReducer, createContext, useEffect, useState} from 'react';
 
 import AppStack from './AppStack';
 import AuthStack from './AuthStack';
-import {reducer} from '../context/reducer';
-import AsyncStorage from '@react-native-community/async-storage';
 import Loader from '../components/loader';
+import {reducer, initialState} from '../context/reducer';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export const AuthContext = createContext();
-
-const initialState = {
-  isAutenticated: false,
-  access_token: null,
-  token_type: null,
-};
 
 const AuthNavigator = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
