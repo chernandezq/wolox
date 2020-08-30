@@ -30,7 +30,6 @@ const BooksHome = (props) => {
         payload: response.data.books,
       });
     } catch (err) {
-      console.warn(err);
     } finally {
       setLoader(false);
     }
