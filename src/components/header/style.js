@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   imageBackgroundContainer: {
-    flex: 0.3,
+    flex: 0.25,
     resizeMode: 'cover',
     alignContent: 'center',
     flexDirection: 'column',
