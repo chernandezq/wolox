@@ -33,6 +33,7 @@ export const reducer = (state, action) => {
         access_token: null,
         token_type: null,
         refresh_token: null,
+        books: [],
       };
     case 'GET_STORAGE':
       return {
@@ -44,7 +45,7 @@ export const reducer = (state, action) => {
     case 'SETBOOKS':
       return {
         ...state,
-        books: [data, ...books],
+        books: action.payload,
       };
     default:
       return state;
