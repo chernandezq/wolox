@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {color_base} from '../../helpers/constants';
+import {color_base, color_disabled} from '../../helpers/constants';
 
 export const styles = StyleSheet.create({
   container: {
@@ -23,6 +23,16 @@ export const styles = StyleSheet.create({
     paddingBottom: 10,
     borderRadius: 3,
     backgroundColor: color_base,
+    height: 48,
+  },
+  botonDisabled: {
+    marginRight: 10,
+    marginLeft: 10,
+    marginTop: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderRadius: 3,
+    backgroundColor: color_disabled,
     height: 48,
   },
   textoBoton: {
